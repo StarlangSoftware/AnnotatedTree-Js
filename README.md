@@ -78,19 +78,13 @@ Detailed Description
 
 To load an annotated TreeBank:
 
-	TreeBankDrawable(File folder, String pattern)
+	TreeBankDrawable(folder: string, pattern: string)
 	a = new TreeBankDrawable("/Turkish-Phrase", ".train")
-
-	TreeBankDrawable(File folder)
-	a = new TreeBankDrawable(new File("/Turkish-Phrase"))
-
-	TreeBankDrawable(File folder, String pattern, int from, int to)
-	a = new TreeBankDrawable(new File("/Turkish-Phrase"), ".train", 1, 500)
 
 To access all the trees in a TreeBankDrawable:
 
-	for (int i = 0; i < a.sentenceCount(); i++){
-		ParseTreeDrawable parseTree = (ParseTreeDrawable) a.get(i);
+	for (let i = 0; i < a.sentenceCount(); i++){
+		let parseTree = <ParseTreeDrawable> a.get(i);
 		....
 	}
 
@@ -98,21 +92,21 @@ To access all the trees in a TreeBankDrawable:
 
 To load a saved ParseTreeDrawable:
 
-	ParseTreeDrawable(FileInputStream file)
+	ParseTreeDrawable(file: string)
 	
 is used. Usually it is more useful to load TreeBankDrawable as explained above than to load ParseTree one by one.
 
 To find the node number of a ParseTreeDrawable:
 
-	int nodeCount()
+	 nodeCount(): number
 	
 the leaf number of a ParseTreeDrawable:
 
-	int leafCount()
+	leafCount(): number
 	
 the word count in a ParseTreeDrawable:
 
-	int wordCount(boolean excludeStopWords)
+	wordCount(excludeStopWords: boolean): number
 	
 above methods can be used.
 
@@ -121,23 +115,23 @@ above methods can be used.
 Information of an annotated word is kept in LayerInfo class. To access the morphological analysis
 of the annotated word:
 
-	MorphologicalParse getMorphologicalParseAt(int index)
+	getMorphologicalParseAt(index: number): MorphologicalParse
 
 meaning of an annotated word:
 
-	String getSemanticAt(int index)
+	getSemanticAt(index: number): string
 
 the shallow parse tag (e.g., subject, indirect object etc.) of annotated word: 
 
-	String getShallowParseAt(int index)
+	getShallowParseAt(index: number): string
 
 the argument tag of the annotated word:
 
-	Argument getArgumentAt(int index)
+	getArgumentAt(index: number): Argument
 	
 the word count in a node:
 
-	int getNumberOfWords()
+	getNumberOfWords(): number
 
 # Cite
 
