@@ -202,4 +202,11 @@ export class ParseTreeDrawable extends ParseTree{
             return sentence;
         }
     }
+
+    generateParseTree(surfaceForm: boolean): ParseTree{
+        let rootNode = <ParseNodeDrawable> this.root
+        let result = new ParseTree(new ParseNode(rootNode.getData()))
+        rootNode.generateParseNode(result.getRoot(), surfaceForm)
+        return result
+    }
 }

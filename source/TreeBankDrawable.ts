@@ -1,7 +1,6 @@
 import {TreeBank} from "nlptoolkit-parsetree/dist/TreeBank";
 import * as fs from "fs";
 import {ParseTreeDrawable} from "./ParseTreeDrawable";
-import {FileDescription} from "nlptoolkit-corpus/dist/FileDescription";
 import {ParseTree} from "nlptoolkit-parsetree/dist/ParseTree";
 import {ViewLayerType} from "nlptoolkit-annotatedsentence/dist/ViewLayerType";
 

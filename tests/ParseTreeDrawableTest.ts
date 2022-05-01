@@ -25,6 +25,10 @@ describe('ParseTreeDrawableTest', function() {
             assert.strictEqual(5, tree8.maxDepth());
             assert.strictEqual(6, tree9.maxDepth());
         });
+        it('testGenerateParseTree', function () {
+            assert.strictEqual("(S (NP (NP (ADJP (ADJP yeni) (ADJP Büyük))  (NP yasada))  (NP (ADJP karmaşık) (NP dil)) )  (VP (NP savaşı) (VP bulandırmıştır))  (. .)) ", tree0.generateParseTree(true).toString());
+            assert.strictEqual("(S (NP (NP (ADJP (ADJP yeni) (ADJP büyük))  (NP yasa))  (NP (ADJP karmaşık) (NP dil)) )  (VP (NP savaş) (VP bulan))  (. .)) ", tree0.generateParseTree(false).toString());
+        });
         it('testGenerateAnnotatedSentence', function () {
             assert.strictEqual("{turkish=yeni}{morphologicalAnalysis=yeni+ADJ}{metaMorphemes=yeni}{semantics=TUR10-0848740}{namedEntity=NONE}{propbank=ARG0$TUR10-0122540} " +
                 "{turkish=Büyük}{morphologicalAnalysis=büyük+ADJ}{metaMorphemes=büyük}{semantics=TUR10-0092410}{namedEntity=NONE}{propbank=ARG0$TUR10-0122540} " +

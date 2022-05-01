@@ -4,7 +4,7 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "nlptoolkit-parsetree/dist/ParseTree", "nlptoolkit-corpus/dist/FileDescription", "fs", "./ParseNodeDrawable", "nlptoolkit-annotatedsentence/dist/ViewLayerType", "nlptoolkit-parsetree/dist/Symbol", "./Processor/NodeDrawableCollector", "./Processor/Condition/IsTurkishLeafNode", "nlptoolkit-annotatedsentence/dist/AnnotatedSentence", "./Processor/Condition/IsEnglishLeafNode", "nlptoolkit-annotatedsentence/dist/AnnotatedWord"], factory);
+        define(["require", "exports", "nlptoolkit-parsetree/dist/ParseTree", "nlptoolkit-corpus/dist/FileDescription", "nlptoolkit-parsetree/dist/ParseNode", "fs", "./ParseNodeDrawable", "nlptoolkit-annotatedsentence/dist/ViewLayerType", "nlptoolkit-parsetree/dist/Symbol", "./Processor/NodeDrawableCollector", "./Processor/Condition/IsTurkishLeafNode", "nlptoolkit-annotatedsentence/dist/AnnotatedSentence", "./Processor/Condition/IsEnglishLeafNode", "nlptoolkit-annotatedsentence/dist/AnnotatedWord"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -12,6 +12,7 @@
     exports.ParseTreeDrawable = void 0;
     const ParseTree_1 = require("nlptoolkit-parsetree/dist/ParseTree");
     const FileDescription_1 = require("nlptoolkit-corpus/dist/FileDescription");
+    const ParseNode_1 = require("nlptoolkit-parsetree/dist/ParseNode");
     const fs = require("fs");
     const ParseNodeDrawable_1 = require("./ParseNodeDrawable");
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
@@ -193,6 +194,12 @@
                 }
                 return sentence;
             }
+        }
+        generateParseTree(surfaceForm) {
+            let rootNode = this.root;
+            let result = new ParseTree_1.ParseTree(new ParseNode_1.ParseNode(rootNode.getData()));
+            rootNode.generateParseNode(result.getRoot(), surfaceForm);
+            return result;
         }
     }
     exports.ParseTreeDrawable = ParseTreeDrawable;

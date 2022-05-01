@@ -26,5 +26,6 @@ export declare class ParseNodeDrawable extends ParseNode {
     layerAll(viewLayerType: ViewLayerType): boolean;
     toTurkishSentence(): string;
     checkGazetteer(gazetteer: Gazetteer, word: string): void;
+    generateParseNode(parseNode: ParseNode, surfaceForm: boolean): void;
     toString(): string;
 }

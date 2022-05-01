@@ -239,6 +239,23 @@ export class ParseNodeDrawable extends ParseNode{
         }
     }
 
+    generateParseNode(parseNode: ParseNode, surfaceForm: boolean){
+        if (this.numberOfChildren() == 0){
+            if (surfaceForm){
+                parseNode.setData(new Symbol(this.getLayerData(ViewLayerType.TURKISH_WORD)))
+            } else {
+                parseNode.setData(new Symbol(this.getLayerInfo().getMorphologicalParseAt(0).getWord().getName()))
+            }
+        } else {
+            parseNode.setData(this.data)
+            for (let i = 0; i < this.numberOfChildren(); i++){
+                let newChild = new ParseNode()
+                parseNode.addChild(newChild);
+                (<ParseNodeDrawable> this.children[i]).generateParseNode(newChild, surfaceForm)
+            }
+        }
+    }
+
     toString(): string{
         if (this.children.length < 2){
             if (this.children.length < 1){

@@ -240,6 +240,24 @@
                 this.getLayerInfo().setLayerData(ViewLayerType_1.ViewLayerType.NER, gazetteer.getName());
             }
         }
+        generateParseNode(parseNode, surfaceForm) {
+            if (this.numberOfChildren() == 0) {
+                if (surfaceForm) {
+                    parseNode.setData(new Symbol_1.Symbol(this.getLayerData(ViewLayerType_1.ViewLayerType.TURKISH_WORD)));
+                }
+                else {
+                    parseNode.setData(new Symbol_1.Symbol(this.getLayerInfo().getMorphologicalParseAt(0).getWord().getName()));
+                }
+            }
+            else {
+                parseNode.setData(this.data);
+                for (let i = 0; i < this.numberOfChildren(); i++) {
+                    let newChild = new ParseNode_1.ParseNode();
+                    parseNode.addChild(newChild);
+                    this.children[i].generateParseNode(newChild, surfaceForm);
+                }
+            }
+        }
         toString() {
             if (this.children.length < 2) {
                 if (this.children.length < 1) {

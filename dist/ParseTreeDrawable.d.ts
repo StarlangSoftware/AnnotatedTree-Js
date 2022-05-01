@@ -28,4 +28,5 @@ export declare class ParseTreeDrawable extends ParseTree {
     nextLeafNode(parseNode: ParseNodeDrawable): ParseNodeDrawable;
     previousLeafNode(parseNode: ParseNodeDrawable): ParseNodeDrawable;
     generateAnnotatedSentence(language?: string): AnnotatedSentence;
+    generateParseTree(surfaceForm: boolean): ParseTree;
 }
