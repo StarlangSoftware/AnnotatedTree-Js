@@ -6,14 +6,12 @@ import { ViewLayerType } from "nlptoolkit-annotatedsentence/dist/ViewLayerType";
 import { AnnotatedSentence } from "nlptoolkit-annotatedsentence/dist/AnnotatedSentence";
 export declare class ParseTreeDrawable extends ParseTree {
     private fileDescription;
-    private name;
     constructor(fileDescriptionOrPath?: any, fileDescriptionOrFileName?: any, index?: number);
     setFileDescription(fileDescription: FileDescription): void;
     getFileDescription(): FileDescription;
     reload(): void;
     setRoot(newRootNode: ParseNode): void;
     readFromFile(currentPath: string): void;
-    setName(name: string): void;
     nextTree(count: number): void;
     previousTree(count: number): void;
     maxDepth(): number;

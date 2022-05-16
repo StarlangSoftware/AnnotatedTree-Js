@@ -14,7 +14,6 @@ import {AnnotatedWord} from "nlptoolkit-annotatedsentence/dist/AnnotatedWord";
 export class ParseTreeDrawable extends ParseTree{
 
     private fileDescription: FileDescription
-    private name: string
 
     constructor(fileDescriptionOrPath?: any, fileDescriptionOrFileName?: any, index?: number) {
         super();
@@ -71,10 +70,6 @@ export class ParseTreeDrawable extends ParseTree{
             line = line.substring(line.indexOf("(") + 1, line.lastIndexOf(")")).trim();
             this.root = new ParseNodeDrawable(null, line, false, 0);
         }
-    }
-
-    setName(name: string){
-        this.name = name
     }
 
     nextTree(count: number){

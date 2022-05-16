@@ -78,9 +78,6 @@
                 this.root = new ParseNodeDrawable_1.ParseNodeDrawable(null, line, false, 0);
             }
         }
-        setName(name) {
-            this.name = name;
-        }
         nextTree(count) {
             if (this.fileDescription.nextFileExists(count)) {
                 this.fileDescription.addToIndex(count);
