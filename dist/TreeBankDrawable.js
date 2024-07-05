@@ -14,6 +14,13 @@
     const fs = require("fs");
     const ParseTreeDrawable_1 = require("./ParseTreeDrawable");
     class TreeBankDrawable extends TreeBank_1.TreeBank {
+        /**
+         * A constructor of {@link TreeBankDrawable} class which reads all {@link ParseTreeDrawable} files with the file
+         * name satisfying the given pattern inside the given folder. For each file inside that folder, the constructor
+         * creates a ParseTreeDrawable and puts in inside the list parseTrees.
+         * @param folder Folder where all parseTrees reside.
+         * @param pattern File pattern such as "." ".train" ".test".
+         */
         constructor(folder, pattern) {
             super();
             let files = fs.readdirSync(folder);
@@ -31,12 +38,25 @@
                 }
             }
         }
+        /**
+         * Accessor for the parseTrees attribute
+         * @return ParseTrees attribute
+         */
         getParseTrees() {
             return this.parseTrees;
         }
+        /**
+         * Accessor for a specific tree with the given position in the array.
+         * @param index Index of the parseTree.
+         * @return Tree that is in the position index
+         */
         get(index) {
             return this.parseTrees[index];
         }
+        /**
+         * Clears the given layer for all nodes in all trees
+         * @param layerType Layer name
+         */
         clearLayer(layerType) {
             for (let tree of this.parseTrees) {
                 let parseTree = tree;

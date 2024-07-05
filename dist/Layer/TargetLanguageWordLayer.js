@@ -12,10 +12,19 @@
     exports.TargetLanguageWordLayer = void 0;
     const MultiWordLayer_1 = require("./MultiWordLayer");
     class TargetLanguageWordLayer extends MultiWordLayer_1.MultiWordLayer {
+        /**
+         * Sets the surface form(s) of the word(s) possibly separated with space.
+         * @param layerValue Surface form(s) of the word(s) possibly separated with space.
+         */
         constructor(layerValue) {
             super();
             this.setLayerValue(layerValue);
         }
+        /**
+         * Sets the surface form(s) of the word(s). Value may consist of multiple surface form(s)
+         * separated via space character.
+         * @param layerValue New layer info
+         */
         setLayerValue(layerValue) {
             this.items = new Array();
             this.layerValue = layerValue;

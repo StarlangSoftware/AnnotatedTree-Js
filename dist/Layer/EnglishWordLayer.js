@@ -12,6 +12,10 @@
     exports.EnglishWordLayer = void 0;
     const SourceLanguageWordLayer_1 = require("./SourceLanguageWordLayer");
     class EnglishWordLayer extends SourceLanguageWordLayer_1.SourceLanguageWordLayer {
+        /**
+         * Constructor for the word layer for English language. Sets the surface form.
+         * @param layerValue Value for the word layer.
+         */
         constructor(layerValue) {
             super(layerValue);
             this.layerName = "english";

@@ -11,6 +11,11 @@ export class IsNoneNode extends IsLeafNode{
         this.secondLanguage = secondLanguage
     }
 
+    /**
+     * Checks if the data of the parse node is '*NONE*'.
+     * @param parseNode Parse node to check.
+     * @return True if the data of the parse node is '*NONE*', false otherwise.
+     */
     satisfies(parseNode: ParseNodeDrawable): boolean {
         if (super.satisfies(parseNode)){
             let data = parseNode.getLayerData(this.secondLanguage);

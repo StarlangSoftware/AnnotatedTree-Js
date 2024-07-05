@@ -12,10 +12,19 @@
     exports.IsNodeWithSynSetId = void 0;
     const IsLeafNode_1 = require("./IsLeafNode");
     class IsNodeWithSynSetId extends IsLeafNode_1.IsLeafNode {
+        /**
+         * Stores the synset id to check.
+         * @param id Synset id to check
+         */
         constructor(id) {
             super();
             this.id = id;
         }
+        /**
+         * Checks if at least one of the semantic ids of the parse node is equal to the given id.
+         * @param parseNode Parse node to check.
+         * @return True if at least one of the semantic ids of the parse node is equal to the given id, false otherwise.
+         */
         satisfies(parseNode) {
             if (super.satisfies(parseNode)) {
                 let layerInfo = parseNode.getLayerInfo();

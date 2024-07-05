@@ -13,6 +13,11 @@
     const IsLeafNode_1 = require("./IsLeafNode");
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
     class IsTurkishLeafNode extends IsLeafNode_1.IsLeafNode {
+        /**
+         * Checks if the parse node is a leaf node and contains a valid Turkish word in its data.
+         * @param parseNode Parse node to check.
+         * @return True if the parse node is a leaf node and contains a valid Turkish word in its data; false otherwise.
+         */
         satisfies(parseNode) {
             if (super.satisfies(parseNode)) {
                 let data = parseNode.getLayerInfo().getLayerData(ViewLayerType_1.ViewLayerType.TURKISH_WORD);

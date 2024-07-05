@@ -13,11 +13,22 @@
     const MultiWordMultiItemLayer_1 = require("./MultiWordMultiItemLayer");
     const MetamorphicParse_1 = require("nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MetamorphicParse");
     class MetaMorphemesMovedLayer extends MultiWordMultiItemLayer_1.MultiWordMultiItemLayer {
+        /**
+         * Constructor for the metaMorphemesMoved layer. Sets the metamorpheme information for multiple words in the node.
+         * @param layerValue Layer value for the metaMorphemesMoved information. Consists of metamorpheme information of
+         *                   multiple words separated via space character.
+         */
         constructor(layerValue) {
             super();
             this.layerName = "metaMorphemesMoved";
             this.setLayerValue(layerValue);
         }
+        /**
+         * Returns the metamorpheme at position index in the metamorpheme list.
+         * @param viewLayer Not used.
+         * @param index Position in the metamorpheme list.
+         * @return The metamorpheme at position index in the metamorpheme list.
+         */
         getLayerInfoAt(viewLayer, index) {
             let size = 0;
             for (let parse of this.items) {
@@ -28,6 +39,11 @@
             }
             return null;
         }
+        /**
+         * Returns the total number of metamorphemes in the words in the node.
+         * @param viewLayer Not used.
+         * @return Total number of metamorphemes in the words in the node.
+         */
         getLayerSize(viewLayer) {
             let size = 0;
             for (let parse of this.items) {
@@ -35,6 +51,10 @@
             }
             return size;
         }
+        /**
+         * Sets the layer value to the string form of the given parse.
+         * @param layerValue New metamorphic parse.
+         */
         setLayerValue(layerValue) {
             this.items = new Array();
             this.layerValue = layerValue;

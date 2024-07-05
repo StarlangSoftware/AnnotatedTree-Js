@@ -13,6 +13,12 @@
     const IsLeafNode_1 = require("./IsLeafNode");
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
     class IsNumber extends IsLeafNode_1.IsLeafNode {
+        /**
+         * Checks if the node is a leaf node and contains numerals as the data and its parent has the tag CD.
+         * @param parseNode Parse node to check.
+         * @return True if the node is a leaf node and contains numerals as the data and its parent has the tag CD, false
+         * otherwise.
+         */
         satisfies(parseNode) {
             if (super.satisfies(parseNode)) {
                 let data = parseNode.getLayerData(ViewLayerType_1.ViewLayerType.ENGLISH_WORD);

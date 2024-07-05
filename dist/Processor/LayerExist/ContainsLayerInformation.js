@@ -13,9 +13,18 @@
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
     const IsTurkishLeafNode_1 = require("../Condition/IsTurkishLeafNode");
     class ContainsLayerInformation {
+        /**
+         * Constructor for ContainsLayerInformation class. Sets the viewLayerType attribute.
+         * @param viewLayerType Layer for which check is done.
+         */
         constructor(viewLayerType) {
             this.viewLayerType = viewLayerType;
         }
+        /**
+         * Checks if all leaf nodes in the leafList contains the given layer information.
+         * @param leafList Array list storing the leaf nodes.
+         * @return True if all leaf nodes in the leafList contains the given layer information, false otherwise.
+         */
         satisfies(leafList) {
             for (let parseNode of leafList) {
                 if (!parseNode.getLayerData(ViewLayerType_1.ViewLayerType.ENGLISH_WORD).includes("*")) {

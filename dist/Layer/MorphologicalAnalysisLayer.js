@@ -14,11 +14,24 @@
     const MorphologicalParse_1 = require("nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalParse");
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
     class MorphologicalAnalysisLayer extends MultiWordMultiItemLayer_1.MultiWordMultiItemLayer {
+        /**
+         * Constructor for the morphological analysis layer. Sets the morphological parse information for multiple words in
+         * the node.
+         * @param layerValue Layer value for the morphological parse information. Consists of morphological parse information
+         *                   of multiple words separated via space character.
+         */
         constructor(layerValue) {
             super();
             this.layerName = "morphologicalAnalysis";
             this.setLayerValue(layerValue);
         }
+        /**
+         * Returns the morphological tag (for PART_OF_SPEECH) or inflectional group (for INFLECTIONAL_GROUP) at position
+         * index.
+         * @param viewLayer Layer type.
+         * @param index Position of the morphological tag (for PART_OF_SPEECH) or inflectional group (for INFLECTIONAL_GROUP)
+         * @return The morphological tag (for PART_OF_SPEECH) or inflectional group (for INFLECTIONAL_GROUP)
+         */
         getLayerInfoAt(viewLayer, index) {
             let size;
             switch (viewLayer) {
@@ -43,6 +56,13 @@
             }
             return null;
         }
+        /**
+         * Returns the total number of morphological tags (for PART_OF_SPEECH) or inflectional groups
+         * (for INFLECTIONAL_GROUP) in the words in the node.
+         * @param viewLayer Layer type.
+         * @return Total number of morphological tags (for PART_OF_SPEECH) or inflectional groups (for INFLECTIONAL_GROUP)
+         * in the words in the node.
+         */
         getLayerSize(viewLayer) {
             let size;
             switch (viewLayer) {
@@ -62,6 +82,10 @@
                     return 0;
             }
         }
+        /**
+         * Sets the layer value to the string form of the given morphological parse.
+         * @param layerValue New morphological parse.
+         */
         setLayerValue(layerValue) {
             if (layerValue instanceof MorphologicalParse_1.MorphologicalParse) {
                 let parse = layerValue;
@@ -80,6 +104,10 @@
                 }
             }
         }
+        /**
+         * Checks if the last inflectional group contains VERB tag.
+         * @return True if the last inflectional group contains VERB tag, false otherwise.
+         */
         isVerbal() {
             let dbLabel = "^DB+";
             let needle = "VERB+";
@@ -92,6 +120,10 @@
             }
             return haystack.includes(needle);
         }
+        /**
+         * Checks if the last verbal inflectional group contains ZERO tag.
+         * @return True if the last verbal inflectional group contains ZERO tag, false otherwise.
+         */
         isNominal() {
             let dbLabel = "^DB+VERB+";
             let needle = "ZERO+";

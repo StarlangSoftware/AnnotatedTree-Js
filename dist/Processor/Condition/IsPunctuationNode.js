@@ -14,6 +14,11 @@
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
     const Word_1 = require("nlptoolkit-dictionary/dist/Dictionary/Word");
     class IsPunctuationNode extends IsLeafNode_1.IsLeafNode {
+        /**
+         * Checks if the node is a leaf node and contains punctuation as the data.
+         * @param parseNode Parse node to check.
+         * @return True if the node is a leaf node and contains punctuation as the data, false otherwise.
+         */
         satisfies(parseNode) {
             if (super.satisfies(parseNode)) {
                 let data = parseNode.getLayerData(ViewLayerType_1.ViewLayerType.ENGLISH_WORD);

@@ -1,1 +1,1 @@
-{"version":3,"file":"IsLeafNode.js","sourceRoot":"","sources":["../../../source/Processor/Condition/IsLeafNode.ts"],"names":[],"mappings":";;;;;;;;;;;;IAGA,MAAa,UAAU;QAEnB,SAAS,CAAC,SAA4B;YAClC,OAAO,SAAS,CAAC,gBAAgB,EAAE,IAAI,CAAC,CAAC;QAC7C,CAAC;KAEJ;IAND,gCAMC"}
+{"version":3,"file":"IsLeafNode.js","sourceRoot":"","sources":["../../../source/Processor/Condition/IsLeafNode.ts"],"names":[],"mappings":";;;;;;;;;;;;IAGA,MAAa,UAAU;QAEnB;;;;WAIG;QACH,SAAS,CAAC,SAA4B;YAClC,OAAO,SAAS,CAAC,gBAAgB,EAAE,IAAI,CAAC,CAAC;QAC7C,CAAC;KAEJ;IAXD,gCAWC"}

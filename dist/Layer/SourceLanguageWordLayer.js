@@ -12,6 +12,10 @@
     exports.SourceLanguageWordLayer = void 0;
     const SingleWordLayer_1 = require("./SingleWordLayer");
     class SourceLanguageWordLayer extends SingleWordLayer_1.SingleWordLayer {
+        /**
+         * Sets the name of the word
+         * @param layerValue Name of the word
+         */
         constructor(layerValue) {
             super();
             this.setLayerValue(layerValue);

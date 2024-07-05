@@ -14,10 +14,20 @@
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
     const Pos_1 = require("nlptoolkit-dictionary/dist/Dictionary/Pos");
     class IsVerbNode extends IsLeafNode_1.IsLeafNode {
+        /**
+         * Stores the wordnet for checking the pos tag of the synset.
+         * @param wordNet Wordnet used for checking the pos tag of the synset.
+         */
         constructor(wordNet) {
             super();
             this.wordNet = wordNet;
         }
+        /**
+         * Checks if the node is a leaf node and at least one of the semantic ids of the parse node belong to a verb synset.
+         * @param parseNode Parse node to check.
+         * @return True if the node is a leaf node and at least one of the semantic ids of the parse node belong to a verb
+         * synset, false otherwise.
+         */
         satisfies(parseNode) {
             let layerInfo = parseNode.getLayerInfo();
             if (super.satisfies(parseNode) && layerInfo != null && layerInfo.getLayerData(ViewLayerType_1.ViewLayerType.SEMANTICS) != null) {

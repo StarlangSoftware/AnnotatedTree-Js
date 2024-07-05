@@ -14,10 +14,19 @@
     const MetamorphicParse_1 = require("nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MetamorphicParse");
     const ViewLayerType_1 = require("nlptoolkit-annotatedsentence/dist/ViewLayerType");
     class MetaMorphemeLayer extends MetaMorphemesMovedLayer_1.MetaMorphemesMovedLayer {
+        /**
+         * Constructor for the metamorpheme layer. Sets the metamorpheme information for multiple words in the node.
+         * @param layerValue Layer value for the metamorpheme information. Consists of metamorpheme information of multiple
+         *                   words separated via space character.
+         */
         constructor(layerValue) {
             super(layerValue);
             this.layerName = "metaMorphemes";
         }
+        /**
+         * Sets the layer value to the string form of the given parse.
+         * @param parse New metamorphic parse.
+         */
         setLayerValue(parse) {
             this.layerValue = parse.toString();
             this.items = new Array();
@@ -28,6 +37,11 @@
                 }
             }
         }
+        /**
+         * Constructs metamorpheme information starting from the position index.
+         * @param index Position of the morpheme to start.
+         * @return Metamorpheme information starting from the position index.
+         */
         getLayerInfoFrom(index) {
             let size = 0;
             for (let parse of this.items) {
@@ -44,6 +58,11 @@
             }
             return null;
         }
+        /**
+         * Removes metamorphemes from the given index. Index shows the position of the metamorpheme in the metamorphemes list.
+         * @param index Position of the metamorpheme from which the other metamorphemes will be removed.
+         * @return New metamorphic parse not containing the removed parts.
+         */
         metaMorphemeRemoveFromIndex(index) {
             if (index >= 0 && index < this.getLayerSize(ViewLayerType_1.ViewLayerType.META_MORPHEME)) {
                 let size = 0;

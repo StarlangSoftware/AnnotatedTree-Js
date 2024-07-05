@@ -18,6 +18,11 @@
             super();
             this.secondLanguage = secondLanguage;
         }
+        /**
+         * Checks if the node is a leaf node and is not a None or Null node.
+         * @param parseNode Parse node to check.
+         * @return True if the node is a leaf node and is not a None or Null node, false otherwise.
+         */
         satisfies(parseNode) {
             if (super.satisfies(parseNode)) {
                 if (new IsNoneNode_1.IsNoneNode(this.secondLanguage).satisfies(parseNode)) {

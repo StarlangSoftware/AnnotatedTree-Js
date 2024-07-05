@@ -3,11 +3,20 @@ import {ViewLayerType} from "nlptoolkit-annotatedsentence/dist/ViewLayerType";
 
 export abstract class TargetLanguageWordLayer extends MultiWordLayer<string>{
 
-    constructor(layerValue: string) {
+    /**
+     * Sets the surface form(s) of the word(s) possibly separated with space.
+     * @param layerValue Surface form(s) of the word(s) possibly separated with space.
+     */
+    protected constructor(layerValue: string) {
         super();
         this.setLayerValue(layerValue)
     }
 
+    /**
+     * Sets the surface form(s) of the word(s). Value may consist of multiple surface form(s)
+     * separated via space character.
+     * @param layerValue New layer info
+     */
     setLayerValue(layerValue: string) {
         this.items = new Array<string>();
         this.layerValue = layerValue;
