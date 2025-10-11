@@ -649,7 +649,7 @@ export class LayerInfo {
             annotatedWord.setNamedEntityType(this.getLayerData(ViewLayerType.NER));
         }
         if (this.layerExists(ViewLayerType.PROPBANK)) {
-            annotatedWord.setArgument(this.getArgument().toString());
+            annotatedWord.setArgumentList(this.getArgument().toString());
         }
         if (this.layerExists(ViewLayerType.SHALLOW_PARSE)) {
             annotatedWord.setShallowParse(this.getShallowParseAt(wordIndex));

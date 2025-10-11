@@ -24,7 +24,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "nlptoolkit-annotatedsentence": "^1.0.4",
+    "nlptoolkit-annotatedsentence": "^1.0.6",
     "nlptoolkit-corpus": "^1.0.9",
     "nlptoolkit-dependencyparser": "^1.0.3",
     "nlptoolkit-dictionary": "^1.0.9",
