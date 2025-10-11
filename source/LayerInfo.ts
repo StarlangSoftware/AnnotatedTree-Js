@@ -35,63 +35,53 @@ export class LayerInfo {
      */
     constructor(info?: string) {
         let splitLayers = info.split(/[{}]/);
-        for (let layer of splitLayers){
-            if (layer == ""){
+        for (let layer of splitLayers) {
+            if (layer == "") {
                 continue;
             }
             let layerType = layer.substring(0, layer.indexOf("="));
             let layerValue = layer.substring(layer.indexOf("=") + 1);
-            if (layerType == "turkish"){
-                this.layers.set(ViewLayerType.TURKISH_WORD, new TurkishWordLayer(layerValue));
-            } else {
-                if (layerType == "persian"){
+            switch (layerType) {
+                case "turkish":
+                    this.layers.set(ViewLayerType.TURKISH_WORD, new TurkishWordLayer(layerValue));
+                    break;
+                case "persian":
                     this.layers.set(ViewLayerType.PERSIAN_WORD, new PersianWordLayer(layerValue));
-                } else {
-                    if (layerType == "english"){
-                        this.layers.set(ViewLayerType.ENGLISH_WORD, new EnglishWordLayer(layerValue));
-                    } else {
-                        if (layerType == "morphologicalAnalysis"){
-                            this.layers.set(ViewLayerType.INFLECTIONAL_GROUP, new MorphologicalAnalysisLayer(layerValue));
-                            this.layers.set(ViewLayerType.PART_OF_SPEECH, new MorphologicalAnalysisLayer(layerValue));
-                        } else {
-                            if (layerType == "metaMorphemes"){
-                                this.layers.set(ViewLayerType.META_MORPHEME, new MetaMorphemeLayer(layerValue));
-                            } else {
-                                if (layerType == "metaMorphemesMoved"){
-                                    this.layers.set(ViewLayerType.META_MORPHEME_MOVED, new MetaMorphemesMovedLayer(layerValue));
-                                } else {
-                                    if (layerType == "dependency"){
-                                        this.layers.set(ViewLayerType.DEPENDENCY, new DependencyLayer(layerValue));
-                                    } else {
-                                        if (layerType == "semantics"){
-                                            this.layers.set(ViewLayerType.SEMANTICS, new TurkishSemanticLayer(layerValue));
-                                        } else {
-                                            if (layerType == "namedEntity"){
-                                                this.layers.set(ViewLayerType.NER, new NERLayer(layerValue));
-                                            } else {
-                                                if (layerType == "propBank"){
-                                                    this.layers.set(ViewLayerType.PROPBANK, new TurkishPropbankLayer(layerValue));
-                                                } else {
-                                                    if (layerType == "englishPropbank"){
-                                                        this.layers.set(ViewLayerType.ENGLISH_PROPBANK, new EnglishPropbankLayer(layerValue));
-                                                    } else {
-                                                        if (layerType == "englishSemantics"){
-                                                            this.layers.set(ViewLayerType.ENGLISH_SEMANTICS, new EnglishSemanticLayer(layerValue));
-                                                        } else {
-                                                            if (layerType == "shallowParse"){
-                                                                this.layers.set(ViewLayerType.SHALLOW_PARSE, new ShallowParseLayer(layerValue));
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                    break;
+                case "english":
+                    this.layers.set(ViewLayerType.ENGLISH_WORD, new EnglishWordLayer(layerValue));
+                    break;
+                case "morphologicalAnalysis":
+                    this.layers.set(ViewLayerType.INFLECTIONAL_GROUP, new MorphologicalAnalysisLayer(layerValue));
+                    this.layers.set(ViewLayerType.PART_OF_SPEECH, new MorphologicalAnalysisLayer(layerValue));
+                    break;
+                case "metaMorphemes":
+                    this.layers.set(ViewLayerType.META_MORPHEME, new MetaMorphemeLayer(layerValue));
+                    break;
+                case "metaMorphemesMoved":
+                    this.layers.set(ViewLayerType.META_MORPHEME_MOVED, new MetaMorphemesMovedLayer(layerValue));
+                    break;
+                case "dependency":
+                    this.layers.set(ViewLayerType.DEPENDENCY, new DependencyLayer(layerValue));
+                    break;
+                case "semantics":
+                    this.layers.set(ViewLayerType.SEMANTICS, new TurkishSemanticLayer(layerValue));
+                    break;
+                case "namedEntity":
+                    this.layers.set(ViewLayerType.NER, new NERLayer(layerValue));
+                    break;
+                case "propBank":
+                    this.layers.set(ViewLayerType.PROPBANK, new TurkishPropbankLayer(layerValue));
+                    break;
+                case "englishPropbank":
+                    this.layers.set(ViewLayerType.ENGLISH_PROPBANK, new EnglishPropbankLayer(layerValue));
+                    break;
+                case "englishSemantics":
+                    this.layers.set(ViewLayerType.ENGLISH_SEMANTICS, new EnglishSemanticLayer(layerValue));
+                    break;
+                case "shallowParse":
+                    this.layers.set(ViewLayerType.SHALLOW_PARSE, new ShallowParseLayer(layerValue));
+                    break;
             }
         }
     }
@@ -103,8 +93,8 @@ export class LayerInfo {
      * @param viewLayer Layer name.
      * @param layerValue New layer value.
      */
-    setLayerData(viewLayer: ViewLayerType, layerValue: string){
-        switch (viewLayer){
+    setLayerData(viewLayer: ViewLayerType, layerValue: string) {
+        switch (viewLayer) {
             case ViewLayerType.PERSIAN_WORD:
                 this.layers.set(ViewLayerType.PERSIAN_WORD, new PersianWordLayer(layerValue));
                 this.layers.delete(ViewLayerType.SEMANTICS);
@@ -160,7 +150,7 @@ export class LayerInfo {
      * Updates the inflectional_group and part_of_speech layers according to the given parse.
      * @param parse New parse to update layers.
      */
-    setMorphologicalAnalysis(parse: MorphologicalParse){
+    setMorphologicalAnalysis(parse: MorphologicalParse) {
         this.layers.set(ViewLayerType.INFLECTIONAL_GROUP, new MorphologicalAnalysisLayer(parse.toString()));
         this.layers.set(ViewLayerType.PART_OF_SPEECH, new MorphologicalAnalysisLayer(parse.toString()));
     }
@@ -169,7 +159,7 @@ export class LayerInfo {
      * Updates the metamorpheme layer according to the given parse.
      * @param parse NEw parse to update layer.
      */
-    setMetaMorphemes(parse: MetamorphicParse){
+    setMetaMorphemes(parse: MetamorphicParse) {
         this.layers.set(ViewLayerType.META_MORPHEME, new MetaMorphemeLayer(parse.toString()));
     }
 
@@ -178,7 +168,7 @@ export class LayerInfo {
      * @param viewLayerType Layer name
      * @return True if the layer exists, false otherwise.
      */
-    layerExists(viewLayerType: ViewLayerType): boolean{
+    layerExists(viewLayerType: ViewLayerType): boolean {
         return this.layers.has(viewLayerType)
     }
 
@@ -193,12 +183,12 @@ export class LayerInfo {
      * propbank,  shallow_parse, english_propbank layers, if the layer does not exist, it checks turkish layer
      * recursively. For meta_morpheme_moved, if the layer does not exist, it checks meta_morpheme layer recursively.
      */
-    checkLayer(viewLayer: ViewLayerType): ViewLayerType{
-        switch (viewLayer){
+    checkLayer(viewLayer: ViewLayerType): ViewLayerType {
+        switch (viewLayer) {
             case ViewLayerType.TURKISH_WORD:
             case ViewLayerType.PERSIAN_WORD:
             case ViewLayerType.ENGLISH_SEMANTICS:
-                if (!this.layers.has(viewLayer)){
+                if (!this.layers.has(viewLayer)) {
                     return ViewLayerType.ENGLISH_WORD;
                 }
             case ViewLayerType.PART_OF_SPEECH:
@@ -224,12 +214,12 @@ export class LayerInfo {
      * Returns number of words in the Turkish or Persian layer, whichever exists.
      * @return Number of words in the Turkish or Persian layer, whichever exists.
      */
-    getNumberOfWords(): number{
-        if (this.layers.has(ViewLayerType.TURKISH_WORD)){
-            return (<TurkishWordLayer> this.layers.get(ViewLayerType.TURKISH_WORD)).size();
+    getNumberOfWords(): number {
+        if (this.layers.has(ViewLayerType.TURKISH_WORD)) {
+            return (<TurkishWordLayer>this.layers.get(ViewLayerType.TURKISH_WORD)).size();
         } else {
-            if (this.layers.has(ViewLayerType.PERSIAN_WORD)){
-                return (<PersianWordLayer> this.layers.get(ViewLayerType.PERSIAN_WORD)).size();
+            if (this.layers.has(ViewLayerType.PERSIAN_WORD)) {
+                return (<PersianWordLayer>this.layers.get(ViewLayerType.PERSIAN_WORD)).size();
             }
         }
     }
@@ -241,14 +231,14 @@ export class LayerInfo {
      * @param layerName Name of the layer.
      * @return Layer info at word position index for a multiword layer.
      */
-    private getMultiWordAt(viewLayerType: ViewLayerType, index: number, layerName: string): string{
-        if (this.layers.has(viewLayerType)){
-            if (this.layers.get(viewLayerType) instanceof MultiWordLayer){
-                let multiWordLayer = <MultiWordLayer<string>> this.layers.get(viewLayerType);
-                if (index < multiWordLayer.size() && index >= 0){
+    private getMultiWordAt(viewLayerType: ViewLayerType, index: number, layerName: string): string {
+        if (this.layers.has(viewLayerType)) {
+            if (this.layers.get(viewLayerType) instanceof MultiWordLayer) {
+                let multiWordLayer = <MultiWordLayer<string>>this.layers.get(viewLayerType);
+                if (index < multiWordLayer.size() && index >= 0) {
                     return multiWordLayer.getItemAt(index);
                 } else {
-                    if (viewLayerType == ViewLayerType.SEMANTICS){
+                    if (viewLayerType == ViewLayerType.SEMANTICS) {
                         return multiWordLayer.getItemAt(multiWordLayer.size() - 1);
                     }
                 }
@@ -261,7 +251,7 @@ export class LayerInfo {
      * @param index Position of the Turkish word.
      * @return The Turkish word at position index.
      */
-    getTurkishWordAt(index: number): string{
+    getTurkishWordAt(index: number): string {
         return this.getMultiWordAt(ViewLayerType.TURKISH_WORD, index, "turkish");
     }
 
@@ -269,9 +259,9 @@ export class LayerInfo {
      * Returns number of meanings in the Turkish layer.
      * @return Number of meanings in the Turkish layer.
      */
-    getNumberOfMeanings(): number{
-        if (this.layers.has(ViewLayerType.SEMANTICS)){
-            return (<TurkishSemanticLayer> this.layers.get(ViewLayerType.SEMANTICS)).size();
+    getNumberOfMeanings(): number {
+        if (this.layers.has(ViewLayerType.SEMANTICS)) {
+            return (<TurkishSemanticLayer>this.layers.get(ViewLayerType.SEMANTICS)).size();
         } else {
             return 0;
         }
@@ -285,7 +275,7 @@ export class LayerInfo {
      * @throws WordNotExistsException If the index is out of bounds, it throws WordNotExistsException.
      * @return The Turkish sense id at position index.
      */
-    getSemanticAt(index: number): string{
+    getSemanticAt(index: number): string {
         return this.getMultiWordAt(ViewLayerType.SEMANTICS, index, "semantics");
     }
 
@@ -297,7 +287,7 @@ export class LayerInfo {
      * @throws WordNotExistsException If the index is out of bounds, it throws WordNotExistsException.
      * @return The shallow parse tag at position index.
      */
-    getShallowParseAt(index: number): string{
+    getShallowParseAt(index: number): string {
         return this.getMultiWordAt(ViewLayerType.SHALLOW_PARSE, index, "shallowParse");
     }
 
@@ -305,10 +295,10 @@ export class LayerInfo {
      * Returns the Turkish PropBank argument info.
      * @return Turkish PropBank argument info.
      */
-    getArgument(): Argument{
-        if (this.layers.has(ViewLayerType.PROPBANK)){
-            if (this.layers.get(ViewLayerType.PROPBANK) instanceof TurkishPropbankLayer){
-                let argumentLayer = <TurkishPropbankLayer> this.layers.get(ViewLayerType.PROPBANK);
+    getArgument(): Argument {
+        if (this.layers.has(ViewLayerType.PROPBANK)) {
+            if (this.layers.get(ViewLayerType.PROPBANK) instanceof TurkishPropbankLayer) {
+                let argumentLayer = <TurkishPropbankLayer>this.layers.get(ViewLayerType.PROPBANK);
                 return argumentLayer.getArgument();
             } else {
                 return null;
@@ -323,10 +313,10 @@ export class LayerInfo {
      * position index.
      * @return English PropBank argument info at position index.
      */
-    getArgumentAt(index: number): Argument{
-        if (this.layers.has(ViewLayerType.ENGLISH_PROPBANK)){
-            if (this.layers.get(ViewLayerType.ENGLISH_PROPBANK) instanceof SingleWordMultiItemLayer){
-                let multiArgumentLayer = <SingleWordMultiItemLayer<Argument>> this.layers.get(ViewLayerType.ENGLISH_PROPBANK);
+    getArgumentAt(index: number): Argument {
+        if (this.layers.has(ViewLayerType.ENGLISH_PROPBANK)) {
+            if (this.layers.get(ViewLayerType.ENGLISH_PROPBANK) instanceof SingleWordMultiItemLayer) {
+                let multiArgumentLayer = <SingleWordMultiItemLayer<Argument>>this.layers.get(ViewLayerType.ENGLISH_PROPBANK);
                 return multiArgumentLayer.getItemAt(index);
             }
         }
@@ -338,11 +328,11 @@ export class LayerInfo {
      * @param index Position of the Turkish word.
      * @return The morphological parse at position index.
      */
-    getMorphologicalParseAt(index: number): MorphologicalParse{
-        if (this.layers.has(ViewLayerType.INFLECTIONAL_GROUP)){
-            if (this.layers.get(ViewLayerType.INFLECTIONAL_GROUP) instanceof MultiWordLayer){
-                let multiWordLayer = <MultiWordLayer<MorphologicalParse>> this.layers.get(ViewLayerType.INFLECTIONAL_GROUP);
-                if (index < multiWordLayer.size() && index >= 0){
+    getMorphologicalParseAt(index: number): MorphologicalParse {
+        if (this.layers.has(ViewLayerType.INFLECTIONAL_GROUP)) {
+            if (this.layers.get(ViewLayerType.INFLECTIONAL_GROUP) instanceof MultiWordLayer) {
+                let multiWordLayer = <MultiWordLayer<MorphologicalParse>>this.layers.get(ViewLayerType.INFLECTIONAL_GROUP);
+                if (index < multiWordLayer.size() && index >= 0) {
                     return multiWordLayer.getItemAt(index);
                 }
             }
@@ -355,11 +345,11 @@ export class LayerInfo {
      * @param index Position of the Turkish word.
      * @return The metamorphic parse at position index.
      */
-    getMetamorphicParseAt(index: number): MetamorphicParse{
-        if (this.layers.has(ViewLayerType.META_MORPHEME)){
-            if (this.layers.get(ViewLayerType.META_MORPHEME) instanceof MultiWordLayer){
-                let multiWordLayer = <MultiWordLayer<MetamorphicParse>> this.layers.get(ViewLayerType.META_MORPHEME);
-                if (index < multiWordLayer.size() && index >= 0){
+    getMetamorphicParseAt(index: number): MetamorphicParse {
+        if (this.layers.has(ViewLayerType.META_MORPHEME)) {
+            if (this.layers.get(ViewLayerType.META_MORPHEME) instanceof MultiWordLayer) {
+                let multiWordLayer = <MultiWordLayer<MetamorphicParse>>this.layers.get(ViewLayerType.META_MORPHEME);
+                if (index < multiWordLayer.size() && index >= 0) {
                     return multiWordLayer.getItemAt(index);
                 }
             }
@@ -372,11 +362,11 @@ export class LayerInfo {
      * @param index Position of the metamorpheme.
      * @return The metamorpheme at position index.
      */
-    getMetaMorphemeAtIndex(index: number): string{
-        if (this.layers.has(ViewLayerType.META_MORPHEME)){
-            if (this.layers.get(ViewLayerType.META_MORPHEME) instanceof MetaMorphemeLayer){
-                let metaMorphemeLayer = <MetaMorphemeLayer> this.layers.get(ViewLayerType.META_MORPHEME);
-                if (index < metaMorphemeLayer.getLayerSize(ViewLayerType.META_MORPHEME) && index >= 0){
+    getMetaMorphemeAtIndex(index: number): string {
+        if (this.layers.has(ViewLayerType.META_MORPHEME)) {
+            if (this.layers.get(ViewLayerType.META_MORPHEME) instanceof MetaMorphemeLayer) {
+                let metaMorphemeLayer = <MetaMorphemeLayer>this.layers.get(ViewLayerType.META_MORPHEME);
+                if (index < metaMorphemeLayer.getLayerSize(ViewLayerType.META_MORPHEME) && index >= 0) {
                     return metaMorphemeLayer.getLayerInfoAt(ViewLayerType.META_MORPHEME, index);
                 }
             }
@@ -389,11 +379,11 @@ export class LayerInfo {
      * @param index Start position of the metamorpheme.
      * @return All metamorphemes from position index.
      */
-    getMetaMorphemeFromIndex(index: number): string{
-        if (this.layers.has(ViewLayerType.META_MORPHEME)){
-            if (this.layers.get(ViewLayerType.META_MORPHEME) instanceof MetaMorphemeLayer){
-                let metaMorphemeLayer = <MetaMorphemeLayer> this.layers.get(ViewLayerType.META_MORPHEME);
-                if (index < metaMorphemeLayer.getLayerSize(ViewLayerType.META_MORPHEME) && index >= 0){
+    getMetaMorphemeFromIndex(index: number): string {
+        if (this.layers.has(ViewLayerType.META_MORPHEME)) {
+            if (this.layers.get(ViewLayerType.META_MORPHEME) instanceof MetaMorphemeLayer) {
+                let metaMorphemeLayer = <MetaMorphemeLayer>this.layers.get(ViewLayerType.META_MORPHEME);
+                if (index < metaMorphemeLayer.getLayerSize(ViewLayerType.META_MORPHEME) && index >= 0) {
                     return metaMorphemeLayer.getLayerInfoFrom(index);
                 }
             }
@@ -405,12 +395,12 @@ export class LayerInfo {
      * @param viewLayer Layer name
      * @return Total items in the given layer.
      */
-    getLayerSize(viewLayer: ViewLayerType): number{
-        if (this.layers.get(viewLayer) instanceof MultiWordMultiItemLayer){
-            return (<MultiWordMultiItemLayer<any>> this.layers.get(viewLayer)).getLayerSize(viewLayer);
+    getLayerSize(viewLayer: ViewLayerType): number {
+        if (this.layers.get(viewLayer) instanceof MultiWordMultiItemLayer) {
+            return (<MultiWordMultiItemLayer<any>>this.layers.get(viewLayer)).getLayerSize(viewLayer);
         } else {
-            if (this.layers.get(viewLayer) instanceof SingleWordMultiItemLayer){
-                return (<SingleWordMultiItemLayer<any>> this.layers.get(viewLayer)).getLayerSize(viewLayer);
+            if (this.layers.get(viewLayer) instanceof SingleWordMultiItemLayer) {
+                return (<SingleWordMultiItemLayer<any>>this.layers.get(viewLayer)).getLayerSize(viewLayer);
             }
         }
         return 0;
@@ -422,13 +412,13 @@ export class LayerInfo {
      * @param index Position of the item.
      * @return The item at position index.
      */
-    getLayerInfoAt(viewLayer: ViewLayerType, index: number): string{
-        switch (viewLayer){
+    getLayerInfoAt(viewLayer: ViewLayerType, index: number): string {
+        switch (viewLayer) {
             case ViewLayerType.META_MORPHEME_MOVED:
             case ViewLayerType.PART_OF_SPEECH:
             case ViewLayerType.INFLECTIONAL_GROUP:
-                if (this.layers.get(viewLayer) instanceof MultiWordMultiItemLayer){
-                    return (<MultiWordMultiItemLayer<any>> this.layers.get(viewLayer)).getLayerInfoAt(viewLayer, index);
+                if (this.layers.get(viewLayer) instanceof MultiWordMultiItemLayer) {
+                    return (<MultiWordMultiItemLayer<any>>this.layers.get(viewLayer)).getLayerInfoAt(viewLayer, index);
                 }
                 break;
             case ViewLayerType.META_MORPHEME:
@@ -444,10 +434,10 @@ export class LayerInfo {
      * Returns the string form of all layer information except part_of_speech layer.
      * @return The string form of all layer information except part_of_speech layer.
      */
-    getLayerDescription(): string{
+    getLayerDescription(): string {
         let result = "";
-        for (let viewLayerType of this.layers.keys()){
-            if (viewLayerType != ViewLayerType.PART_OF_SPEECH){
+        for (let viewLayerType of this.layers.keys()) {
+            if (viewLayerType != ViewLayerType.PART_OF_SPEECH) {
                 result = result + this.layers.get(viewLayerType).getLayerDescription();
             }
         }
@@ -459,8 +449,8 @@ export class LayerInfo {
      * @param viewLayer Layer name.
      * @return Layer info for the given layer.
      */
-    getLayerData(viewLayer: ViewLayerType): string{
-        if (this.layers.has(viewLayer)){
+    getLayerData(viewLayer: ViewLayerType): string {
+        if (this.layers.has(viewLayer)) {
             return this.layers.get(viewLayer).getLayerValue();
         } else {
             return null;
@@ -474,7 +464,7 @@ export class LayerInfo {
      * @return Layer info for the given layer if it exists. Otherwise, it returns the fallback layer info determined by
      * the checkLayer.
      */
-    getRobustLayerData(viewLayer: ViewLayerType): string{
+    getRobustLayerData(viewLayer: ViewLayerType): string {
         viewLayer = this.checkLayer(viewLayer);
         return this.getLayerData(viewLayer);
     }
@@ -482,12 +472,12 @@ export class LayerInfo {
     /**
      * Initializes the metamorphemesmoved layer with metamorpheme layer except the root word.
      */
-    private updateMetaMorphemesMoved(){
-        if (this.layers.has(ViewLayerType.META_MORPHEME)){
-            let metaMorphemeLayer = <MetaMorphemeLayer> this.layers.get(ViewLayerType.META_MORPHEME);
-            if (metaMorphemeLayer.size() > 0){
+    private updateMetaMorphemesMoved() {
+        if (this.layers.has(ViewLayerType.META_MORPHEME)) {
+            let metaMorphemeLayer = <MetaMorphemeLayer>this.layers.get(ViewLayerType.META_MORPHEME);
+            if (metaMorphemeLayer.size() > 0) {
                 let result = metaMorphemeLayer.getItemAt(0).toString();
-                for (let i = 1; i < metaMorphemeLayer.size(); i++){
+                for (let i = 1; i < metaMorphemeLayer.size(); i++) {
                     result = result + " " + metaMorphemeLayer.getItemAt(i).toString();
                 }
                 this.layers.set(ViewLayerType.META_MORPHEME_MOVED, new MetaMorphemesMovedLayer(result));
@@ -499,14 +489,14 @@ export class LayerInfo {
      * Removes the given layer from hash map.
      * @param layerType Layer to be removed.
      */
-    removeLayer(layerType: ViewLayerType){
+    removeLayer(layerType: ViewLayerType) {
         this.layers.delete(layerType)
     }
 
     /**
      * Removes metamorpheme and metamorphemesmoved layers.
      */
-    metaMorphemeClear(){
+    metaMorphemeClear() {
         this.layers.delete(ViewLayerType.META_MORPHEME);
         this.layers.delete(ViewLayerType.META_MORPHEME_MOVED);
     }
@@ -514,42 +504,42 @@ export class LayerInfo {
     /**
      * Removes English layer.
      */
-    englishClear(){
+    englishClear() {
         this.layers.delete(ViewLayerType.ENGLISH_WORD);
     }
 
     /**
      * Removes the dependency layer.
      */
-    dependencyClear(){
+    dependencyClear() {
         this.layers.delete(ViewLayerType.DEPENDENCY);
     }
 
     /**
      * Removed metamorphemesmoved layer.
      */
-    metaMorphemesMovedClear(){
+    metaMorphemesMovedClear() {
         this.layers.delete(ViewLayerType.META_MORPHEME_MOVED);
     }
 
     /**
      * Removes the Turkish semantic layer.
      */
-    semanticClear(){
+    semanticClear() {
         this.layers.delete(ViewLayerType.SEMANTICS);
     }
 
     /**
      * Removes the English semantic layer.
      */
-    englishSemanticClear(){
+    englishSemanticClear() {
         this.layers.delete(ViewLayerType.ENGLISH_SEMANTICS);
     }
 
     /**
      * Removes the morphological analysis, part of speech, metamorpheme, and metamorphemesmoved layers.
      */
-    morphologicalAnalysisClear(){
+    morphologicalAnalysisClear() {
         this.layers.delete(ViewLayerType.INFLECTIONAL_GROUP);
         this.layers.delete(ViewLayerType.PART_OF_SPEECH);
         this.layers.delete(ViewLayerType.META_MORPHEME);
@@ -561,11 +551,11 @@ export class LayerInfo {
      * @param index Position of the metamorpheme to be removed.
      * @return Metamorphemes concatenated as a string after the removed metamorpheme.
      */
-    metaMorphemeRemove(index: number): MetamorphicParse{
+    metaMorphemeRemove(index: number): MetamorphicParse {
         let removedParse
-        if (this.layers.has(ViewLayerType.META_MORPHEME)){
-            let metaMorphemeLayer = <MetaMorphemeLayer> this.layers.get(ViewLayerType.META_MORPHEME);
-            if (index >= 0 && index < metaMorphemeLayer.getLayerSize(ViewLayerType.META_MORPHEME)){
+        if (this.layers.has(ViewLayerType.META_MORPHEME)) {
+            let metaMorphemeLayer = <MetaMorphemeLayer>this.layers.get(ViewLayerType.META_MORPHEME);
+            if (index >= 0 && index < metaMorphemeLayer.getLayerSize(ViewLayerType.META_MORPHEME)) {
                 removedParse = metaMorphemeLayer.metaMorphemeRemoveFromIndex(index);
                 this.updateMetaMorphemesMoved();
             }
@@ -577,9 +567,9 @@ export class LayerInfo {
      * Checks if the last inflectional group contains VERB tag.
      * @return True if the last inflectional group contains VERB tag, false otherwise.
      */
-    isVerbal(): boolean{
-        if (this.layers.has(ViewLayerType.INFLECTIONAL_GROUP)){
-            return (<MorphologicalAnalysisLayer> this.layers.get(ViewLayerType.INFLECTIONAL_GROUP)).isVerbal();
+    isVerbal(): boolean {
+        if (this.layers.has(ViewLayerType.INFLECTIONAL_GROUP)) {
+            return (<MorphologicalAnalysisLayer>this.layers.get(ViewLayerType.INFLECTIONAL_GROUP)).isVerbal();
         } else {
             return false;
         }
@@ -589,9 +579,9 @@ export class LayerInfo {
      * Checks if the last verbal inflectional group contains ZERO tag.
      * @return True if the last verbal inflectional group contains ZERO tag, false otherwise.
      */
-    isNominal(): boolean{
-        if (this.layers.has(ViewLayerType.INFLECTIONAL_GROUP)){
-            return (<MorphologicalAnalysisLayer> this.layers.get(ViewLayerType.INFLECTIONAL_GROUP)).isNominal();
+    isNominal(): boolean {
+        if (this.layers.has(ViewLayerType.INFLECTIONAL_GROUP)) {
+            return (<MorphologicalAnalysisLayer>this.layers.get(ViewLayerType.INFLECTIONAL_GROUP)).isNominal();
         } else {
             return false;
         }
@@ -603,13 +593,13 @@ export class LayerInfo {
      * words. Named entity tags and propbank arguments are the same for all words.
      * @return An array list of LayerInfo objects created from the layer info of the node.
      */
-    divideIntoWords(): Array<LayerInfo>{
+    divideIntoWords(): Array<LayerInfo> {
         let result = new Array<LayerInfo>();
-        for (let i = 0; i < this.getNumberOfWords(); i++){
+        for (let i = 0; i < this.getNumberOfWords(); i++) {
             let layerInfo = new LayerInfo();
             layerInfo.setLayerData(ViewLayerType.TURKISH_WORD, this.getTurkishWordAt(i));
             layerInfo.setLayerData(ViewLayerType.ENGLISH_WORD, this.getLayerData(ViewLayerType.ENGLISH_WORD));
-            if (this.layerExists(ViewLayerType.INFLECTIONAL_GROUP)){
+            if (this.layerExists(ViewLayerType.INFLECTIONAL_GROUP)) {
                 layerInfo.setMorphologicalAnalysis(this.getMorphologicalParseAt(i));
             }
             if (this.layerExists(ViewLayerType.META_MORPHEME)) {
@@ -621,7 +611,7 @@ export class LayerInfo {
             if (this.layerExists(ViewLayerType.ENGLISH_SEMANTICS)) {
                 layerInfo.setLayerData(ViewLayerType.ENGLISH_SEMANTICS, this.getLayerData(ViewLayerType.ENGLISH_SEMANTICS));
             }
-            if (this.layerExists(ViewLayerType.NER)){
+            if (this.layerExists(ViewLayerType.NER)) {
                 layerInfo.setLayerData(ViewLayerType.NER, this.getLayerData(ViewLayerType.NER));
             }
             if (this.layerExists(ViewLayerType.SEMANTICS)) {
@@ -644,24 +634,24 @@ export class LayerInfo {
      * @param wordIndex Index of the word to be converted.
      * @return Converted annotatedWord
      */
-    toAnnotatedWord(wordIndex: number): AnnotatedWord{
+    toAnnotatedWord(wordIndex: number): AnnotatedWord {
         let annotatedWord = new AnnotatedWord(this.getTurkishWordAt(wordIndex));
-        if (this.layerExists(ViewLayerType.INFLECTIONAL_GROUP)){
+        if (this.layerExists(ViewLayerType.INFLECTIONAL_GROUP)) {
             annotatedWord.setParse(this.getMorphologicalParseAt(wordIndex).toString());
         }
-        if (this.layerExists(ViewLayerType.META_MORPHEME)){
+        if (this.layerExists(ViewLayerType.META_MORPHEME)) {
             annotatedWord.setMetamorphicParse(this.getMetamorphicParseAt(wordIndex).toString());
         }
-        if (this.layerExists(ViewLayerType.SEMANTICS)){
+        if (this.layerExists(ViewLayerType.SEMANTICS)) {
             annotatedWord.setSemantic(this.getSemanticAt(wordIndex));
         }
-        if (this.layerExists(ViewLayerType.NER)){
+        if (this.layerExists(ViewLayerType.NER)) {
             annotatedWord.setNamedEntityType(this.getLayerData(ViewLayerType.NER));
         }
-        if (this.layerExists(ViewLayerType.PROPBANK)){
+        if (this.layerExists(ViewLayerType.PROPBANK)) {
             annotatedWord.setArgument(this.getArgument().toString());
         }
-        if (this.layerExists(ViewLayerType.SHALLOW_PARSE)){
+        if (this.layerExists(ViewLayerType.SHALLOW_PARSE)) {
             annotatedWord.setShallowParse(this.getShallowParseAt(wordIndex));
         }
         return annotatedWord;

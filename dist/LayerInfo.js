@@ -46,69 +46,47 @@
                 }
                 let layerType = layer.substring(0, layer.indexOf("="));
                 let layerValue = layer.substring(layer.indexOf("=") + 1);
-                if (layerType == "turkish") {
-                    this.layers.set(ViewLayerType_1.ViewLayerType.TURKISH_WORD, new TurkishWordLayer_1.TurkishWordLayer(layerValue));
-                }
-                else {
-                    if (layerType == "persian") {
+                switch (layerType) {
+                    case "turkish":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.TURKISH_WORD, new TurkishWordLayer_1.TurkishWordLayer(layerValue));
+                        break;
+                    case "persian":
                         this.layers.set(ViewLayerType_1.ViewLayerType.PERSIAN_WORD, new PersianWordLayer_1.PersianWordLayer(layerValue));
-                    }
-                    else {
-                        if (layerType == "english") {
-                            this.layers.set(ViewLayerType_1.ViewLayerType.ENGLISH_WORD, new EnglishWordLayer_1.EnglishWordLayer(layerValue));
-                        }
-                        else {
-                            if (layerType == "morphologicalAnalysis") {
-                                this.layers.set(ViewLayerType_1.ViewLayerType.INFLECTIONAL_GROUP, new MorphologicalAnalysisLayer_1.MorphologicalAnalysisLayer(layerValue));
-                                this.layers.set(ViewLayerType_1.ViewLayerType.PART_OF_SPEECH, new MorphologicalAnalysisLayer_1.MorphologicalAnalysisLayer(layerValue));
-                            }
-                            else {
-                                if (layerType == "metaMorphemes") {
-                                    this.layers.set(ViewLayerType_1.ViewLayerType.META_MORPHEME, new MetaMorphemeLayer_1.MetaMorphemeLayer(layerValue));
-                                }
-                                else {
-                                    if (layerType == "metaMorphemesMoved") {
-                                        this.layers.set(ViewLayerType_1.ViewLayerType.META_MORPHEME_MOVED, new MetaMorphemesMovedLayer_1.MetaMorphemesMovedLayer(layerValue));
-                                    }
-                                    else {
-                                        if (layerType == "dependency") {
-                                            this.layers.set(ViewLayerType_1.ViewLayerType.DEPENDENCY, new DependencyLayer_1.DependencyLayer(layerValue));
-                                        }
-                                        else {
-                                            if (layerType == "semantics") {
-                                                this.layers.set(ViewLayerType_1.ViewLayerType.SEMANTICS, new TurkishSemanticLayer_1.TurkishSemanticLayer(layerValue));
-                                            }
-                                            else {
-                                                if (layerType == "namedEntity") {
-                                                    this.layers.set(ViewLayerType_1.ViewLayerType.NER, new NERLayer_1.NERLayer(layerValue));
-                                                }
-                                                else {
-                                                    if (layerType == "propBank") {
-                                                        this.layers.set(ViewLayerType_1.ViewLayerType.PROPBANK, new TurkishPropbankLayer_1.TurkishPropbankLayer(layerValue));
-                                                    }
-                                                    else {
-                                                        if (layerType == "englishPropbank") {
-                                                            this.layers.set(ViewLayerType_1.ViewLayerType.ENGLISH_PROPBANK, new EnglishPropbankLayer_1.EnglishPropbankLayer(layerValue));
-                                                        }
-                                                        else {
-                                                            if (layerType == "englishSemantics") {
-                                                                this.layers.set(ViewLayerType_1.ViewLayerType.ENGLISH_SEMANTICS, new EnglishSemanticLayer_1.EnglishSemanticLayer(layerValue));
-                                                            }
-                                                            else {
-                                                                if (layerType == "shallowParse") {
-                                                                    this.layers.set(ViewLayerType_1.ViewLayerType.SHALLOW_PARSE, new ShallowParseLayer_1.ShallowParseLayer(layerValue));
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                        break;
+                    case "english":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.ENGLISH_WORD, new EnglishWordLayer_1.EnglishWordLayer(layerValue));
+                        break;
+                    case "morphologicalAnalysis":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.INFLECTIONAL_GROUP, new MorphologicalAnalysisLayer_1.MorphologicalAnalysisLayer(layerValue));
+                        this.layers.set(ViewLayerType_1.ViewLayerType.PART_OF_SPEECH, new MorphologicalAnalysisLayer_1.MorphologicalAnalysisLayer(layerValue));
+                        break;
+                    case "metaMorphemes":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.META_MORPHEME, new MetaMorphemeLayer_1.MetaMorphemeLayer(layerValue));
+                        break;
+                    case "metaMorphemesMoved":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.META_MORPHEME_MOVED, new MetaMorphemesMovedLayer_1.MetaMorphemesMovedLayer(layerValue));
+                        break;
+                    case "dependency":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.DEPENDENCY, new DependencyLayer_1.DependencyLayer(layerValue));
+                        break;
+                    case "semantics":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.SEMANTICS, new TurkishSemanticLayer_1.TurkishSemanticLayer(layerValue));
+                        break;
+                    case "namedEntity":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.NER, new NERLayer_1.NERLayer(layerValue));
+                        break;
+                    case "propBank":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.PROPBANK, new TurkishPropbankLayer_1.TurkishPropbankLayer(layerValue));
+                        break;
+                    case "englishPropbank":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.ENGLISH_PROPBANK, new EnglishPropbankLayer_1.EnglishPropbankLayer(layerValue));
+                        break;
+                    case "englishSemantics":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.ENGLISH_SEMANTICS, new EnglishSemanticLayer_1.EnglishSemanticLayer(layerValue));
+                        break;
+                    case "shallowParse":
+                        this.layers.set(ViewLayerType_1.ViewLayerType.SHALLOW_PARSE, new ShallowParseLayer_1.ShallowParseLayer(layerValue));
+                        break;
                 }
             }
         }
