@@ -627,7 +627,7 @@
                 annotatedWord.setNamedEntityType(this.getLayerData(ViewLayerType_1.ViewLayerType.NER));
             }
             if (this.layerExists(ViewLayerType_1.ViewLayerType.PROPBANK)) {
-                annotatedWord.setArgument(this.getArgument().toString());
+                annotatedWord.setArgumentList(this.getArgument().toString());
             }
             if (this.layerExists(ViewLayerType_1.ViewLayerType.SHALLOW_PARSE)) {
                 annotatedWord.setShallowParse(this.getShallowParseAt(wordIndex));
